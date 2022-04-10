@@ -68,7 +68,7 @@ class Comment(db.Model):
     blogpost_id = Column(Integer, ForeignKey('blog_posts.id'))
     blog_posts = relationship("BlogPost", back_populates="comments")
 
-# db.create_all()
+db.create_all()
 
 #forms
 class RegisterForm(FlaskForm):
@@ -101,8 +101,11 @@ def admin_only(func):
 #routes
 @app.route('/')
 def get_all_posts():
-    posts = BlogPost.query.all()
-    return render_template("index.html", all_posts=posts)
+    try:
+        posts = BlogPost.query.all()
+        return render_template("index.html", all_posts=posts)
+    except:
+        return res
 
 
 @app.route('/register', methods=["POST", "GET"])
