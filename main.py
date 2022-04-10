@@ -68,7 +68,7 @@ class Comment(db.Model):
     blogpost_id = Column(Integer, ForeignKey('blog_posts.id'))
     blog_posts = relationship("BlogPost", back_populates="comments")
 
-db.create_all()
+# db.create_all()
 
 #forms
 class RegisterForm(FlaskForm):
